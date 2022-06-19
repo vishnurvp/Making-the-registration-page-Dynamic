@@ -32,11 +32,6 @@ function createPost(post) {
     });    
 }
 
-createPost({title: 'post three', body: 'this is post three'})
-.then(getPosts)
-.catch(err => console.log(err));
-
-
 function deletePost() {
     return new Promise((resolve, reject) =>{
         setTimeout(() => {
@@ -72,28 +67,38 @@ function deletePost() {
 
 // const promise1 = Promise.resolve('hello world');
 // const promise2 = 10;
-const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, 'googbye'));
+// const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, 'googbye'));
 
-function updateLastUserActivityTime() {
-    return new Promise((resolve)=>{
-        setTimeout(()=>{
-            last_edit = new Date();
-            resolve(last_edit);
-        },1000);
-    })
+// function updateLastUserActivityTime() {
+//     return new Promise((resolve)=>{
+//         setTimeout(()=>{
+//             last_edit = new Date();
+//             resolve(last_edit);
+//         },1000);
+//     })
+// }
+// let p1 = createPost({title: 'post four', body: 'this is post four'});
+// let p2 = updateLastUserActivityTime()
+// Promise.all([p1, p2]).then(([a,b]) => {
+//     console.log('_______________________________________');
+//     console.log('Posts: ');
+//     for (let post of a) console.log(post);
+//     console.log('Last Activity time: '+b);
+// }).then(deletePost).then((val)=>{
+//     console.log('________________________________________');
+//     console.log('Posts afeter Deleting: ')
+//     for (let post of val) console.log(post);
+// });
+
+
+
+async function printPosts(){
+    await createPost({title: 'post three', body: 'this is post three'}).then(getPosts);
+    await createPost({title: 'post four', body: 'this is post four'}).then(getPosts);
+    await createPost({title: 'post five', body: 'this is post five'}).then(getPosts);
 }
-let p1 = createPost({title: 'post four', body: 'this is post four'});
-let p2 = updateLastUserActivityTime()
-Promise.all([p1, p2]).then(([a,b]) => {
-    console.log('_______________________________________');
-    console.log('Posts: ');
-    for (let post of a) console.log(post);
-    console.log('Last Activity time: '+b);
-}).then(deletePost).then((val)=>{
-    console.log('________________________________________');
-    console.log('Posts afeter Deleting: ')
-    for (let post of val) console.log(post);
-});
+
+printPosts();
 
 
 
